@@ -17,3 +17,10 @@
 - Requêtes et ajout de tuples dans la tables Auteur
 - Requêtes avec relation ( ex: trouver les livres d'un auteur en paramètres )
 
+# TP3 Templates HTML et static CSS
+
+- Ajout des fichiers index.html, contact.html et about.html dans les templates de l'app
+- Ajout d'un fichier de style dans le dossier static et changement dans les fichiers html
+- Modification de views.py pour indiquer qu'elle template afficher a l'appelle de l'url spécifique ( route )
+- Ajout de paramètre dans le render_templates pour afficher du texte différent sur la page en fonction de ces paramètres
+
