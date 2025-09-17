@@ -33,3 +33,12 @@ MAUBERT Célestin
 - Url dynamique avec paramètres pour changer l'affichage en fonction de ces paramètres
 - Implémentation de bootstrap pour les templates et le front-end 
 
+# TP5 Consultation/Modification/Création/Supression de données (WTF)
+
+- Modification de base.html pour créer un nouvel auteur
+- Création d'un formulaire a l'aide de WTF pour Modifier les informations d'un auteur (Nom)
+- Création des autres formulaires pour le reste des changements pour Auteur
+- Ajout d'une nouvelle ligne dans auteur_list.html afin de accéder a ces nouvelles pages(Voir, Editer)
+- Création de fonction dans views.py pour commit les changements du formulaire fait par l'utilisateur dans la BD
+- Pareil pour livre pour la partie view et update
+
