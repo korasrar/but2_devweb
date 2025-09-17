@@ -2,12 +2,13 @@ h1 {
     color : red;
 }
 
-th,
-td {
-  border: 1px solid rgba(145, 145, 145, 0.753);
-  padding: 8px 10px;
-}
-
 tbody {
   background-color: rgb(209, 209, 209);
+}
+
+td, th{
+padding: 0.5em;
+text-align: center;
+border-collapse:initial;
+border: thin solid black;
 }
