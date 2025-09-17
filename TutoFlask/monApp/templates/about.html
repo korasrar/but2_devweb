@@ -1,13 +1,11 @@
 <!doctype html >
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for ('static', filename ='style.css') }}">
-        <title>{{ title }}</title>
-    </head>
+{% extends "base.html" %}
+
+{% block main %}
     <body>
         <h1>Voici des informations sur moi !</h1>
         <p>Nom : {{nom}}</p>
         <p>Prénom : {{prenom}}</p>
         <p>Age : {{age}}</p>
     </body>
-</html >
+{% endblock %}

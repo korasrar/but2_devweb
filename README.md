@@ -1,5 +1,7 @@
 # Dev Web
 
+MAUBERT Célestin
+
 # TP1 Flask
 
 - Création d'une première application avec Flask
@@ -23,4 +25,11 @@
 - Ajout d'un fichier de style dans le dossier static et changement dans les fichiers html
 - Modification de views.py pour indiquer qu'elle template afficher a l'appelle de l'url spécifique ( route )
 - Ajout de paramètre dans le render_templates pour afficher du texte différent sur la page en fonction de ces paramètres
+
+# TP4 Bootstrap + Héritage et affichage de données
+
+- Appel a la bd pour afficher des données par rapport aux auteurs et aux livres
+- Héritage du fichier base.html pour le header (réduire les répétitions)
+- Url dynamique avec paramètres pour changer l'affichage en fonction de ces paramètres
+- Implémentation de bootstrap pour les templates et le front-end 
 
