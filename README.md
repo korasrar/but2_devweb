@@ -42,3 +42,11 @@ MAUBERT Célestin
 - Création de fonction dans views.py pour commit les changements du formulaire fait par l'utilisateur dans la BD
 - Pareil pour livre pour la partie view et update
 
+# TP6 AUTH, Déconnexion, Redirection automatique et protection des vues
+
+- Ajout d'un formulaire de connexion
+- Modification de la navbar pour se connecter et se déconnecter
+- Protection des vues et des fonctions si le user n'est pas login
+- Redirection automatique d'un user si il tente de faire une action que nécessite de se connecter, si il se login, il sera automatiquement rediriger vers la page qu'il voulait accéder
+- Création de commande flask pour créer un user et modifier son mot de passe
+

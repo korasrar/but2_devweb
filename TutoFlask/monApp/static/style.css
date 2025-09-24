@@ -12,3 +12,7 @@ text-align: center;
 border-collapse:initial;
 border: thin solid black;
 }
+
+main{
+  margin-top: 60px;
+}
