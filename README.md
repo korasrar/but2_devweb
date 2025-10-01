@@ -50,3 +50,8 @@ MAUBERT Célestin
 - Redirection automatique d'un user si il tente de faire une action que nécessite de se connecter, si il se login, il sera automatiquement rediriger vers la page qu'il voulait accéder
 - Création de commande flask pour créer un user et modifier son mot de passe
 
+# TP7 Test, Coverage, Pytest
+
+- Ajout de test et configuration d'une bd temporaire
+- Création de rapport
+- pas encore fini

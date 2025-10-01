@@ -1,0 +1,1 @@
+from monApp.models import User
