@@ -54,4 +54,5 @@ MAUBERT Célestin
 
 - Ajout de test et configuration d'une bd temporaire
 - Création de rapport
-- pas encore fini
+- Création de test sur POST et GET
+- Création de test sur forms et routes de auteur

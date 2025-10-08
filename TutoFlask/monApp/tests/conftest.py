@@ -1,7 +1,7 @@
 import pytest
-from monApp import app,db
+from monApp import app,db, commands
 from monApp.models import Auteur, Livre, User
-import tempfile
+from hashlib import sha256
 
 @pytest.fixture
 def testapp():
@@ -13,8 +13,13 @@ def testapp():
         # Ajouter un auteur de test
         auteur = Auteur(Nom="Victor Hugo")
         livre = Livre(Prix=3,Titre="Test", Url="Test", Img="test",auteur_id=1)
-        db.session.add(auteur)
-        db.session.add(livre)
+        #commands.newuser("CDAL","AIGRE") # fonctionne pas !!
+        login = "CDAL"
+        pwd = "AIGRE"
+        m = sha256()
+        m.update(pwd.encode())
+        unUser = User(Login=login ,Password =m.hexdigest())
+        db.session.add_all([auteur, livre, unUser])
         db.session.commit()
     yield app
         
