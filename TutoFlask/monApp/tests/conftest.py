@@ -12,6 +12,7 @@ def testapp():
         db.create_all()
         # Ajouter un auteur de test
         auteur = Auteur(Nom="Victor Hugo")
+        auteur2 = Auteur(Nom="Voltaire")
         livre = Livre(Prix=3,Titre="Test", Url="Test", Img="test",auteur_id=1)
         #commands.newuser("CDAL","AIGRE") # fonctionne pas !!
         login = "CDAL"
@@ -19,7 +20,7 @@ def testapp():
         m = sha256()
         m.update(pwd.encode())
         unUser = User(Login=login ,Password =m.hexdigest())
-        db.session.add_all([auteur, livre, unUser])
+        db.session.add_all([auteur, auteur2, livre, unUser])
         db.session.commit()
     yield app
         

@@ -1,13 +1,14 @@
 from monApp import app, commands
 
+
 def login(client, username, password, next_path):
     return client.post("/login/",
-                    data={
-                            "Login": username,
-                            "Password": password,
-                            "next": next_path
-                        },
-                        follow_redirects=True)
+                       data={
+                           "Login": username,
+                           "Password": password,
+                           "next": next_path
+                       },
+                       follow_redirects=True)
 
 
 def test_auteurs_liste(
@@ -38,15 +39,18 @@ def test_auteur_update_after_login(client, testapp):
         print(response.data)
         assert b"Victor Hugo" in response.data
 
+
 def test_auteur_view(client, testapp):
     with testapp.app_context():
         response = client.get('/auteurs/1/view/')
-        assert response.status_code == 200 # vérifier qu'on arrive bien sur la page
+        assert response.status_code == 200  # vérifier qu'on arrive bien sur la page
         assert b"Victor Hugo" in response.data
+
 
 def test_auteur_delete_before_login(client):
     response = client.get('/auteurs/1/delete', follow_redirects=True)
-    assert b"Login" in response.data # vérifier redirection
+    assert b"Login" in response.data  # vérifier redirection
+
 
 def test_auteur_delete_after_login(client, testapp):
     with testapp.app_context():
@@ -58,9 +62,11 @@ def test_auteur_delete_after_login(client, testapp):
         assert response.status_code == 200
         assert b"Victor Hugo" in response.data
 
+
 def test_auteur_add_before_login(client):
     response = client.get('/auteur/', follow_redirects=True)
-    assert b"Login" in response.data # vérifier redirection
+    assert b"Login" in response.data  # vérifier redirection
+
 
 def test_auteur_add_after_login(client, testapp):
     with testapp.app_context():
