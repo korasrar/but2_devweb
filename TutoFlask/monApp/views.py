@@ -56,8 +56,9 @@ def saveAuteur():
 @app.route('/auteurs/<idA>/view/')
 def viewAuteur(idA):
     unAuteur = Auteur.query.get(idA)
+    livresAuteur = Livre.query.filter_by(auteur_id=idA).all()
     unForm = FormAuteur (idA=unAuteur.idA , Nom=unAuteur.Nom)
-    return render_template("auteur_view.html",selectedAuteur=unAuteur, viewForm=unForm)
+    return render_template("auteur_view.html",selectedAuteur=unAuteur, viewForm=unForm, livres=livresAuteur)
 
 @app.route('/auteur/')
 @login_required
