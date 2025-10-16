@@ -1,6 +1,3 @@
-import pytest
-import os
-import tempfile
 from monApp import db
 from monApp.models import Auteur, Livre, User
 from monApp.commands import loaddb, syncdb, newuser, newpasswrd
