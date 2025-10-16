@@ -97,7 +97,7 @@ def insertAuteur():
         insertedAuteur = Auteur(Nom=unForm.Nom.data)
         db.session.add(insertedAuteur)
         db.session.commit()
-        insertedId = Auteur.query.count()
+        insertedId = Auteur.query.get(insertedAuteur.idA).idA
         return redirect(url_for('viewAuteur', idA=insertedId))
     return render_template("auteur_create.html", createForm=unForm)
 
