@@ -2,6 +2,8 @@
 
 MAUBERT Célestin
 
+
+
 # TP1 Flask
 
 - Création d'une première application avec Flask
@@ -56,3 +58,48 @@ MAUBERT Célestin
 - Création de rapport
 - Création de test sur POST et GET
 - Création de test sur forms et routes de auteur
+
+## Lancer le projet
+
+### Installation des dépendances
+
+```bash
+cd TutoFlask
+virtualenv -p python3 venv
+source venv/bin/activate  
+pip install -r requirements.txt
+```
+
+### Initialiser la base de données
+
+```bash
+flask loaddb monApp/data/data.yml
+```
+
+### Créer un utilisateur (optionnel)
+
+```bash
+flask newuser <nom_utilisateur>
+flask password <nom_utilisateur>
+```
+
+### Lancer l'application
+
+```bash
+flask run
+```
+
+L'application sera accessible à l'adresse : <http://127.0.0.1:5000/>
+
+### Lancer les tests
+
+```bash
+coverage run -m pytest
+```
+
+### Générer le rapport de couverture
+
+```bash
+coverage report
+coverage html
+```

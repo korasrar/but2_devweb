@@ -25,7 +25,11 @@
                 <td>{{ unLivre.Prix }}</td>
                 <td><a href="{{ unLivre.Url }}">{{ unLivre.Url }}</a></td>
                 <td><img src="{{ url_for('static', filename='images/' + unLivre.Img) }}" alt="Image du Livre"></td>
-                <td><a href="{{ url_for('viewAuteur', idA=unLivre.auteur.idA)}}">{{ unLivre.auteur.Nom }}</a></td>
+                {% if unLivre.auteur %}
+                    <td><a href="{{ url_for('viewAuteur', idA=unLivre.auteur.idA)}}">{{ unLivre.auteur.Nom }}</a></td>
+                {% else %}
+                    <td>Aucun auteur</td>
+                {% endif %}
                 <td>
                 <div class="task-controls">
                 <a href="{{ url_for('viewLivre', idL=unLivre.idL) }}" class="btn btn-info" title="Voir"><i class="fas fa-eye"></i></a>
