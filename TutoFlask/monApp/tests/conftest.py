@@ -1,4 +1,5 @@
 import pytest
+from click.testing import CliRunner
 from monApp import app,db, commands
 from monApp.models import Auteur, Livre, User
 from hashlib import sha256
@@ -31,3 +32,7 @@ def testapp():
 @pytest.fixture
 def client(testapp):
     return testapp.test_client()
+
+@pytest.fixture
+def runner(testapp):
+    return testapp.test_cli_runner()
