@@ -28,9 +28,10 @@
                 <td><a href="{{ url_for('viewAuteur', idA=unLivre.auteur.idA)}}">{{ unLivre.auteur.Nom }}</a></td>
                 <td>
                 <div class="task-controls">
-                <a href="{{ url_for('viewLivre', idL=unLivre.idL) }}" class="btn btn-nfo">Voir <i class="fas fa-eye"></i></a>
+                <a href="{{ url_for('viewLivre', idL=unLivre.idL) }}" class="btn btn-info" title="Voir"><i class="fas fa-eye"></i></a>
                 {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('updateLivre', idL=unLivre.idL) }}" class="btn btn-warning">Editer <i class="fas fa-pen"></i></a>
+                    <a href="{{ url_for('updateLivre', idL=unLivre.idL) }}" class="btn btn-warning" title="Éditer"><i class="fas fa-pen"></i></a>
+                    <a href="{{ url_for('ajouter_favori', idL=unLivre.idL) }}" class="btn btn-success" title="Ajouter aux favoris"><i class="fas fa-heart"></i></a>
                 {% endif %}
                 </div>
                 </td>

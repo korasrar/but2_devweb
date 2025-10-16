@@ -40,3 +40,17 @@ class User(db.Model, UserMixin):
     @login_manager.user_loader
     def load_user(username):
         return User.query.get(username)
+
+class Favori(db.Model):
+    idF = db.Column(db.Integer, primary_key=True)
+    user_login = db.Column(db.String(50), db.ForeignKey('user.Login'))
+    livre_id = db.Column(db.Integer, db.ForeignKey('livre.idL'))
+    user = db.relationship('User', backref=db.backref('favoris', lazy='dynamic'))
+    livre = db.relationship('Livre', backref=db.backref('favoris', lazy='dynamic'))
+
+    def __init__(self, user_login, livre_id):
+        self.user_login = user_login
+        self.livre_id = livre_id
+
+    def __repr__(self):
+        return f"<Favori ({self.idF}) User: {self.user_login}, Livre ID: {self.livre_id}>"

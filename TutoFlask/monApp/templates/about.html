@@ -1,11 +1,48 @@
-<!doctype html >
 {% extends "base.html" %}
 
 {% block main %}
-    <body>
-        <h1>Voici des informations sur moi !</h1>
-        <p>Nom : {{nom}}</p>
-        <p>Prénom : {{prenom}}</p>
-        <p>Age : {{age}}</p>
-    </body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2><i class="fas fa-user-circle"></i> À propos de moi</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-12 text-center mb-4">
+                            <i class="fas fa-user fa-5x text-primary"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex align-items-center">
+                            <i class="fas fa-id-badge fa-2x text-primary me-3"></i>
+                            <div>
+                                <strong>Nom :</strong>
+                                <span class="ms-2">{{ nom }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="list-group-item d-flex align-items-center">
+                            <i class="fas fa-signature fa-2x text-success me-3"></i>
+                            <div>
+                                <strong>Prénom :</strong>
+                                <span class="ms-2">{{ prenom }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="list-group-item d-flex align-items-center">
+                            <i class="fas fa-birthday-cake fa-2x text-warning me-3"></i>
+                            <div>
+                                <strong>Âge :</strong>
+                                <span class="ms-2">{{ age }} ans</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

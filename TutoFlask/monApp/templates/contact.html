@@ -1,28 +1,57 @@
-<!doctype html >
 {% extends "base.html" %}
 
 {% block main %}
-    <body>
-      <h1>Contact :</h1>
-      <table>
-        <caption>
-          Liste des contact de Célestin Maubert
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Social Media</th>
-            <th scope="col">Username</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">GitHub</th>
-            <td><a href="https://github.com/korasrar">@korasrar</a></td>
-          </tr>
-          <tr>
-            <th scope="row">Twitter</th>
-            <td><a href="https://x.com/korasxoxo">@korasxoxo</a></td>
-          </tr>
-      </table>
-    </body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-info text-white text-center">
+                    <h2><i class="fas fa-address-book"></i> Contact</h2>
+                </div>
+                <div class="card-body">
+                    <h4 class="text-center mb-4 text-muted">
+                        <i class="fas fa-user"></i> Célestin Maubert
+                    </h4>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="mb-3">
+                                <i class="fas fa-share-alt"></i> Réseaux sociaux
+                            </h5>
+                        </div>
+                    </div>
+                    
+                    <div class="list-group">
+                        <a href="https://github.com/korasrar" 
+                           class="list-group-item list-group-item-action d-flex align-items-center"
+                           target="_blank">
+                            <i class="fab fa-github fa-3x me-4 text-dark"></i>
+                            <div>
+                                <h5 class="mb-1">GitHub</h5>
+                                <p class="mb-0 text-muted">@korasrar</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://x.com/korasxoxo" 
+                           class="list-group-item list-group-item-action d-flex align-items-center"
+                           target="_blank">
+                            <i class="fab fa-twitter fa-3x me-4 text-info"></i>
+                            <div>
+                                <h5 class="mb-1">Twitter</h5>
+                                <p class="mb-0 text-muted">@korasxoxo</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <p class="text-muted">
+                            <i class="fas fa-envelope"></i> 
+                            N'hésitez pas à me contacter via mes réseaux sociaux !
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

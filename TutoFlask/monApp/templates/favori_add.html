@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block main %}
+<h1>Ajout d'un livre aux favoris</h1>
+    <form role="form" method="POST" action="{{ url_for('save_favori') }}">
+        {{ favoriForm.hidden_tag() }}
+        <div
+            {% if favoriForm.livre_id.errors %}
+                class="form-group has-error"
+            {% else %}
+                class="form-group mb-3"
+            {% endif %}
+        >
+        {{ favoriForm.livre_id.label }}
+        {{ favoriForm.livre_id(size=50, class_="form-control") }}
+        </div>
+        {% if favoriForm.livre_id.errors %}
+            <ul class="list-group">
+            {% for e in favoriForm.livre_id.errors %}
+                <li class="list-group-item list-group-item-danger">{{ e }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        <input class="btn btn-success" type="submit" value="Ajouter aux favoris">
+        <a href="{{ url_for('getLivres') }}" class="btn btn-secondary">Retour</a>
+    </form>
+{% endblock %}

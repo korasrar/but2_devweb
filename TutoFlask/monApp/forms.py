@@ -25,3 +25,7 @@ class LoginForm(FlaskForm):
         m.update(self.Password.data.encode())
         passwd = m.hexdigest()
         return unUser if passwd == unUser.Password else None
+
+class FavoriForm(FlaskForm):
+    idF = HiddenField('idF')
+    livre_id = StringField('Livre ID', validators=[DataRequired()])

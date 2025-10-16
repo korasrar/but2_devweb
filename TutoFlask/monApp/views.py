@@ -1,45 +1,60 @@
-from .app import app,db
+from .app import app, db
 from flask import render_template, request, url_for, redirect
 from config import ABOUT
 from config import CONTACT
-from monApp.models import Auteur
-from monApp.models import Livre
-from monApp.forms import FormAuteur, FormLivre, LoginForm
-from flask_login import login_user, logout_user, login_required
+from monApp.models import Auteur, Livre, Favori
+from monApp.forms import FormAuteur, FormLivre, LoginForm, FavoriForm
+from flask_login import login_user, logout_user, login_required, current_user
+
 
 @app.route('/')
 @app.route('/index/')
 def index():
     # si pas de paramètres
-    if len(request.args)==0:
-        return render_template("index.html",title="R3.01 Dev Web avec Flask",name="Cricri")
-    else :
+    if len(request.args) == 0:
+        return render_template("index.html",
+                               title="R3.01 Dev Web avec Flask",
+                               name="Cricri")
+    else:
         param_name = request.args.get('name')
-        return render_template("index.html",title="R3.01 Dev Web avec Flask",name=param_name)
+        return render_template("index.html",
+                               title="R3.01 Dev Web avec Flask",
+                               name=param_name)
+
 
 @app.route('/about/')
 def about():
-    return render_template("about.html",title ="Dev Web | About",nom="Célestin",prenom="Maubert",age="17 ans")
+    return render_template("about.html",
+                           title="Dev Web | About",
+                           nom="Célestin",
+                           prenom="Maubert",
+                           age="17")
+
 
 @app.route('/contact/')
 def contact():
-    return render_template("contact.html",title ="Dev Web | Contact")
+    return render_template("contact.html", title="Dev Web | Contact")
 
 
 @app.route('/auteurs/')
 def getAuteurs():
     lesAuteurs = Auteur.query.all()
-    return render_template('auteurs_list.html', title="R3.01 Dev Web avec Flask", auteurs=lesAuteurs)
+    return render_template('auteurs_list.html',
+                           title="R3.01 Dev Web avec Flask",
+                           auteurs=lesAuteurs)
 
 
 @app.route('/auteurs/<idA>/update/')
 @login_required
 def updateAuteur(idA):
     unAuteur = Auteur.query.get(idA)
-    unForm = FormAuteur(idA=unAuteur.idA , Nom=unAuteur.Nom)
-    return render_template("auteur_update.html",selectedAuteur=unAuteur, updateForm=unForm)
+    unForm = FormAuteur(idA=unAuteur.idA, Nom=unAuteur.Nom)
+    return render_template("auteur_update.html",
+                           selectedAuteur=unAuteur,
+                           updateForm=unForm)
 
-@app.route ('/auteur/save/', methods =("POST" ,))
+
+@app.route('/auteur/save/', methods=("POST", ))
 def saveAuteur():
     updatedAuteur = None
     unForm = FormAuteur()
@@ -51,14 +66,21 @@ def saveAuteur():
         updatedAuteur.Nom = unForm.Nom.data
         db.session.commit()
         return redirect(url_for('viewAuteur', idA=updatedAuteur.idA))
-    return render_template("auteur_update.html",selectedAuteur=updatedAuteur, updateForm=unForm)
+    return render_template("auteur_update.html",
+                           selectedAuteur=updatedAuteur,
+                           updateForm=unForm)
+
 
 @app.route('/auteurs/<idA>/view/')
 def viewAuteur(idA):
     unAuteur = Auteur.query.get(idA)
     livresAuteur = Livre.query.filter_by(auteur_id=idA).all()
-    unForm = FormAuteur (idA=unAuteur.idA , Nom=unAuteur.Nom)
-    return render_template("auteur_view.html",selectedAuteur=unAuteur, viewForm=unForm, livres=livresAuteur)
+    unForm = FormAuteur(idA=unAuteur.idA, Nom=unAuteur.Nom)
+    return render_template("auteur_view.html",
+                           selectedAuteur=unAuteur,
+                           viewForm=unForm,
+                           livres=livresAuteur)
+
 
 @app.route('/auteur/')
 @login_required
@@ -66,7 +88,8 @@ def createAuteur():
     unForm = FormAuteur()
     return render_template("auteur_create.html", createForm=unForm)
 
-@app.route ('/auteur/insert/', methods =("POST" ,))
+
+@app.route('/auteur/insert/', methods=("POST", ))
 @login_required
 def insertAuteur():
     insertedAuteur = None
@@ -79,14 +102,18 @@ def insertAuteur():
         return redirect(url_for('viewAuteur', idA=insertedId))
     return render_template("auteur_create.html", createForm=unForm)
 
+
 @app.route('/auteurs/<idA>/delete/')
 @login_required
 def deleteAuteur(idA):
     unAuteur = Auteur.query.get(idA)
     unForm = FormAuteur(idA=unAuteur.idA, Nom=unAuteur.Nom)
-    return render_template("auteur_delete.html",selectedAuteur=unAuteur, deleteForm=unForm)
+    return render_template("auteur_delete.html",
+                           selectedAuteur=unAuteur,
+                           deleteForm=unForm)
 
-@app.route ('/auteur/erase/', methods =("POST" ,))
+
+@app.route('/auteur/erase/', methods=("POST", ))
 def eraseAuteur():
     deletedAuteur = None
     unForm = FormAuteur()
@@ -98,19 +125,26 @@ def eraseAuteur():
     db.session.commit()
     return redirect(url_for('getAuteurs'))
 
+
 @app.route('/livres/')
 def getLivres():
     lesLivres = Livre.query.all()
-    return render_template('livres_list.html', title="R3.01 Dev Web avec Flask", livres=lesLivres)
+    return render_template('livres_list.html',
+                           title="R3.01 Dev Web avec Flask",
+                           livres=lesLivres)
+
 
 @app.route('/livres/<idL>/update/')
 @login_required
 def updateLivre(idL):
     unLivre = Livre.query.get(idL)
-    unForm = FormLivre(idL=unLivre.idL , Prix=unLivre.Prix)
-    return render_template("livre_update.html",selectedLivre=unLivre, updateForm=unForm)
+    unForm = FormLivre(idL=unLivre.idL, Prix=unLivre.Prix)
+    return render_template("livre_update.html",
+                           selectedLivre=unLivre,
+                           updateForm=unForm)
 
-@app.route ('/livre/save/', methods =("POST" ,))
+
+@app.route('/livre/save/', methods=("POST", ))
 def saveLivre():
     updatedLivre = None
     unForm = FormLivre()
@@ -122,32 +156,92 @@ def saveLivre():
         updatedLivre.Prix = unForm.Prix.data
         db.session.commit()
         return redirect(url_for('viewLivre', idL=updatedLivre.idL))
-    return render_template("livre_update.html",selectedLivre=updatedLivre, updateForm=unForm)
+    return render_template("livre_update.html",
+                           selectedLivre=updatedLivre,
+                           updateForm=unForm)
+
 
 @app.route('/livres/<idL>/view/')
 def viewLivre(idL):
     unLivre = Livre.query.get(idL)
-    unForm = FormLivre(idL=unLivre.idL , Prix=unLivre.Prix)
-    return render_template("livre_view.html",selectedLivre=unLivre, viewForm=unForm)
+    unForm = FormLivre(idL=unLivre.idL, Prix=unLivre.Prix)
+    return render_template("livre_view.html",
+                           selectedLivre=unLivre,
+                           viewForm=unForm)
 
-@app.route ("/login/", methods =("GET","POST",))
+
+@app.route('/favoris/')
+@login_required
+def favoris():
+    favoris_list = Favori.query.filter_by(user_login=current_user.Login).all()
+    return render_template("favori_list.html",
+                           title="R3.01 Dev Web avec Flask",
+                           favoris_list=favoris_list)
+
+
+@app.route('/favoris/add/<idL>/')
+@login_required
+def ajouter_favori(idL):
+    livre = Livre.query.get(idL)
+    unForm = FavoriForm(livre_id=idL)
+    return render_template("favori_add.html",
+                           selectedLivre=livre,
+                           favoriForm=unForm)
+
+@app.route('/favoris/save/', methods=('POST',))
+@login_required
+def save_favori():
+    unForm = FavoriForm()
+    if unForm.validate_on_submit():
+        idL = int(unForm.livre_id.data)
+        livre = Livre.query.get(idL)
+        if livre:
+            favori_existant = Favori.query.filter_by(user_login=current_user.Login, livre_id=idL).first()
+            if not favori_existant:
+                nouveau_favori = Favori(user_login=current_user.Login, livre_id=idL)
+                db.session.add(nouveau_favori)
+                db.session.commit()
+                return redirect(url_for('favoris'))
+    # Si validation échoue, retour au formulaire avec les erreurs
+    livre = Livre.query.get(int(unForm.livre_id.data)) if unForm.livre_id.data else None
+    return render_template("favori_add.html",
+                           selectedLivre=livre,
+                           favoriForm=unForm)
+
+
+@app.route('/favoris/delete/<idF>/')
+@login_required
+def delete_favori(idF):
+    favori = Favori.query.get(idF)
+    if favori and favori.user_login == current_user.Login:
+        db.session.delete(favori)
+        db.session.commit()
+    return redirect(url_for('favoris'))
+
+
+@app.route("/login/", methods=(
+    "GET",
+    "POST",
+))
 def login():
     unForm = LoginForm()
-    unUser=None
+    unUser = None
     if not unForm.is_submitted():
         unForm.next.data = request.args.get('next')
     elif unForm.validate_on_submit():
         unUser = unForm.get_authenticated_user()
     if unUser:
         login_user(unUser)
-        next = unForm.next.data or url_for("index",name=unUser.Login)
-        return redirect (next)
-    return render_template ("login.html",form=unForm)
+        next = unForm.next.data or url_for("index", name=unUser.Login)
+        return redirect(next)
+    return render_template("login.html", form=unForm)
 
-@app.route ("/logout/")
+
+@app.route("/logout/")
 def logout():
     logout_user()
-    return redirect ( url_for ('index'))
+    return redirect(url_for('index'))
+
 
 if __name__ == "__main__":
     app.run()

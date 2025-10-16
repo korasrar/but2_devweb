@@ -16,3 +16,15 @@ border: thin solid black;
 main{
   margin-top: 60px;
 }
+
+.task-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.task-controls .btn {
+  margin: 0;
+}

@@ -1,13 +1,53 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h1 >Consultation du prix du Livre {{ selectedLivre.Prix }}</h1>
-    <form role="form" method="POST" action="">
-    {{ viewForm.hidden_tag () }}
-    <div class="form-group mb-3">
-        {{ viewForm.Prix.label }}
-        {{ viewForm.Prix(size=50, disabled=True, class_="form-control") }}
+<h1>Détails du livre</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ url_for('static', filename='images/' + selectedLivre.Img) }}" 
+                     alt="Couverture de {{ selectedLivre.Titre }}" 
+                     class="img-fluid rounded">
+            </div>
+            <div class="col-md-8">
+                <h2 class="card-title">{{ selectedLivre.Titre }}</h2>
+                
+                <div class="mb-3">
+                    <strong>ID :</strong> {{ selectedLivre.idL }}
+                </div>
+                
+                <div class="mb-3">
+                    <strong>Auteur :</strong> 
+                    <a href="{{ url_for('viewAuteur', idA=selectedLivre.auteur.idA) }}">
+                        {{ selectedLivre.auteur.Nom }}
+                    </a>
+                </div>
+                
+                <div class="mb-3">
+                    <strong>Prix :</strong> {{ selectedLivre.Prix }} €
+                </div>
+                
+                <div class="mb-3">
+                    <strong>URL :</strong> 
+                    <a href="{{ selectedLivre.Url }}" target="_blank">
+                        {{ selectedLivre.Url }}
+                    </a>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('getLivres') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Retour
+                    </a>
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('updateLivre', idL=selectedLivre.idL) }}" class="btn btn-warning">
+                        <i class="fas fa-pen"></i> Éditer
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
-    <a href="{{ url_for('getLivres') }}" class="btn btn-secondary">Retour</a>
-</form >
+</div>
 {% endblock %}
