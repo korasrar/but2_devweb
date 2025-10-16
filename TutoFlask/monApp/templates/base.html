@@ -34,6 +34,9 @@
                         <ul class="dropdown-menu" aria-labelledby="livresDropdown">
                             <li><a class="dropdown-item" href="{{ url_for('getLivres') }}">Liste des livres</a>
                             </li>
+                            {% if current_user.is_authenticated %}
+                            <li><a class="dropdown-item" href="{{ url_for('createLivre') }}">Créer un livre</a></li>
+                            {% endif %}
                         </ul>
                     </li>
                     {% if current_user.is_authenticated %}

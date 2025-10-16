@@ -12,6 +12,22 @@ class FormLivre(FlaskForm):
     idL=HiddenField('idL')
     Prix = StringField ('Prix', validators =[DataRequired()])
 
+
+class FormCreateLivre(FlaskForm):
+    Titre = StringField ('Titre', validators =[DataRequired()])
+    Prix = StringField ('Prix', validators =[DataRequired()])
+    Url = StringField ('Url', validators =[DataRequired()])
+    Img = StringField ('Img', validators =[DataRequired()])
+    Auteur_idA = StringField ('Auteur_idA', validators =[DataRequired()])
+
+
+"""idL = db.Column(db.Integer, primary_key=True)
+    Prix = db.Column(db.Float)
+    Titre = db.Column(db.String(255))
+    Url = db.Column(db.String(255))
+    Img = db.Column(db.String(255))
+    auteur_id = db.Column (db.Integer , db.ForeignKey ("auteur.idA") )
+    auteur = db.relationship ("Auteur", backref =db.backref ("livres", lazy="dynamic") )"""
 class LoginForm(FlaskForm):
     Login = StringField ('Identifiant')
     Password = PasswordField ('Mot de passe')

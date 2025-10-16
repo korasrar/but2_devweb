@@ -1,9 +1,8 @@
 from .app import app, db
 from flask import render_template, request, url_for, redirect
-from config import ABOUT
-from config import CONTACT
+from config import ABOUT, CONTACT
 from monApp.models import Auteur, Livre, Favori
-from monApp.forms import FormAuteur, FormLivre, LoginForm, FavoriForm
+from monApp.forms import FormAuteur, FormLivre, LoginForm, FavoriForm, FormCreateLivre
 from flask_login import login_user, logout_user, login_required, current_user
 
 
@@ -132,6 +131,27 @@ def getLivres():
     return render_template('livres_list.html',
                            title="R3.01 Dev Web avec Flask",
                            livres=lesLivres)
+
+
+@app.route('/livres/insert/', methods=("POST", ))
+@login_required
+def insertLivre():
+    insertedLivre = None
+    unForm = FormCreateLivre()
+    if unForm.validate_on_submit():
+        insertedLivre = Livre(Titre=unForm.Titre.data, Prix=unForm.Prix.data, Url=unForm.Url.data, Img=unForm.Img.data, auteur_id=unForm.Auteur_idA.data)
+        db.session.add(insertedLivre)
+        db.session.commit()
+        insertedId = Livre.query.count()
+        return redirect(url_for('viewLivre', idL=insertedId))
+    return render_template("livre_create.html", createForm=unForm)
+
+
+@app.route('/livre/create/')
+@login_required
+def createLivre():
+    unForm = FormCreateLivre()
+    return render_template("livre_create.html", createForm=unForm)
 
 
 @app.route('/livres/<idL>/update/')
